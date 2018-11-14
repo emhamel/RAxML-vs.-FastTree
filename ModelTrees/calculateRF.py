@@ -7,79 +7,102 @@ from dendropy.calculate import treecompare
 def setuploop(treefilelist,outfile):
 
    largeDenseList = dendropy.TreeList();
-   largeDenseTree = dendropy.Tree.get(path="largelengthDense.tt", schema="newick", suppress_edge_lengths=True)
+   largeDenseTree = dendropy.Tree.get(path="largelengthDense.tt", schema="newick")
    largeDenseTreeString = largeDenseTree.as_string(schema="newick")
    largeDenseList.read(data=largeDenseTreeString, schema="newick")
    
+   largeSparseList = dendropy.TreeList();
    largeSparseTree = dendropy.Tree.get(path="largelengthSparce.tt", schema="newick")
+   largeSparseTreeString = largeSparseTree.as_string(schema="newick")
+   largeSparseList.read(data=largeSparseTreeString, schema="newick")
+
+   moderateDenseList = dendropy.TreeList();
    moderateDenseTree = dendropy.Tree.get(path="moderatelengthDense.tt", schema="newick")
-   moderateSparseTree = dendropy.Tree.get(path="moderatelengthSparce.tt", schema="newick")  
+   moderateDenseTreeString = moderateDenseTree.as_string(schema="newick")
+   moderateDenseList.read(data=moderateDenseTreeString, schema="newick")
+
+   moderateSparseList = dendropy.TreeList();
+   moderateSparseTree = dendropy.Tree.get(path="moderatelengthSparce.tt", schema="newick")
+   moderateSparseTreeString = moderateSparseTree.as_string(schema="newick")
+   moderateDenseList.read(data=moderateSparseTreeString, schema="newick")
+
+   smallDenseList = dendropy.TreeList();
    smallDenseTree = dendropy.Tree.get(path="smalllengthDense.tt", schema="newick")
+   smallDenseTreeString = smallDenseTree.as_string(schema="newick')
+   smallDenseList.read(data=smallDenseTreeString, schema="newick")
+
+   smallSparseList = dendropy.TreeList();
    smallSparseTree = dendropy.Tree.get(path="smalllengthSparce.tt", schema="newick")
+   smallSparseTreeString = smallSparseTree.as_string(schema="newick")
+   smallSparseList.read(data=smallSparseTreeString, schema="newick")
 
    modelTrees = [largeDenseTree, largeSparseTree, moderateDenseTree, moderateSparseTree, smallDenseTree, smallSparseTree]
    NJTrees = []
 
-   for file in treefilelist:
+   for file in enumerate(treefilelist):
       if "tre" not in file:
          continue
-      treeList = dendropy.TreeList(taxon_namespace=largeDenseList.taxon_namespace);
-      tree = dendropy.Tree.get(path="./NJtrees/"+file, schema="newick")
-      treeString = tree.as_string(schema="newick")
-      treeList.read(data=treeString, schema="newick")
-      NJTrees.append(treeString)
+      NJTrees.append(file)
 
-   for treeString in NJTrees[0:19]:
-      print(largeDenseTree.as_string(schema="newick"),)
-      print(tree.as_string(schema="newick"),)
-      symdiff = treecompare.symmetric_difference(largeDenseList[0], treeList[0])
-      print(symdiff)
-      #symdiff = treecompare.weighted_robinson_foulds_distance(largeDenseTree, tree)
-      #symdiff = largeDenseTree.robinson_foulds_distance(tree) / len(largeDenseTree.nodes())
-      towrite2 = str(symdiff) + '\n'
-      with open(outfile, 'a') as out2:
-         out2.write(towrite2)
+   for index, file in NJTrees
 
-   for tree in NJTrees[20:39]:
-      symdiff = treecompare.weighted_robinson_foulds_distance(largeSparseTree, tree)
-      #symdiff = largeSparseTree.robinson_foulds_distance(tree) / len(largeSparseTree.nodes())
-      towrite2 = str(symdiff) + '\n'
-      with open(outfile, 'a') as out2:
-         out2.write(towrite2)
+      if index < 20:
+         treeList = dendropy.TreeList(taxon_namespace=largeDenseList.taxon_namespace);
+         tree = dendropy.Tree.get(path="./NJtrees/"+file, schema="newick")
+         treeString = tree.as_string(schema="newick")
+         treeList.read(data=treeString, schema="newick")
+         symdiff = treecompare.weighted_robinson_foulds_distance(largeDenseTree, treeString)
+         symdiff = symdiff/len(largeDenseTree.nodes())
+         print(symdiff)
 
-   for tree in NJTrees[40:59]:
-      symdiff = treecompare.weighted_robinson_foulds_distance(moderateDenseTree, tree)
-      #symdiff = moderateDenseTree.robinson_foulds_distance(tree) / len(moderateDenseTree.nodes())
-      towrite2 = str(symdiff) + '\n'
-      with open(outfile, 'a') as out2:
-         out2.write(towrite2)
+       if index < 40 and index > 19:
+         treeList = dendropy.TreeList(taxon_namespace=largeSparseList.taxon_namespace);
+         tree = dendropy.Tree.get(path="./NJtrees/"+file, schema="newick")
+         treeString = tree.as_string(schema="newick")
+         treeList.read(data=treeString, schema="newick")
+         symdiff = treecompare.weighted_robinson_foulds_distance(largeSparseTree, treeString)
+         symdiff = symdiff/len(largeSparseTree.nodes())
+         print(symdiff)
 
-   for tree in NJTrees[60:79]:
-      symdiff = treecompare.weighted_robinson_foulds_distance(moderateSparseTree, tree)
-      #symdiff = moderateSparseTree.robinson_foulds_distance(tree) / len(moderateSparseTree.nodes())
-      towrite2 = str(symdiff) + '\n'
-      with open(outfile, 'a') as out2:
-         out2.write(towrite2)
+       if index < 60 and index > 39:
+         treeList = dendropy.TreeList(taxon_namespace=moderateDenseList.taxon_namespace);
+         tree = dendropy.Tree.get(path="./NJtrees/"+file, schema="newick")
+         treeString = tree.as_string(schema="newick")
+         treeList.read(data=treeString, schema="newick")
+         symdiff = treecompare.weighted_robinson_foulds_distance(moderateDenseTree, treeString)
+         symdiff = symdiff/len(moderateDenseTree.nodes())
+         print(symdiff)
 
-   for tree in NJTrees[80:99]:
-      symdiff = treecompare.weighted_robinson_foulds_distance(smallDenseTree, tree)
-      #symdiff = smallDenseTree.robinson_foulds_distance(tree) / len(smallDenseTree.nodes())
-      towrite2 = str(symdiff) + '\n'
-      with open(outfile, 'a') as out2:
-         out2.write(towrite2)
+       if index < 80 and index > 59:
+         treeList = dendropy.TreeList(taxon_namespace=moderateSparseList.taxon_namespace);
+         tree = dendropy.Tree.get(path="./NJtrees/"+file, schema="newick")
+         treeString = tree.as_string(schema="newick")
+         treeList.read(data=treeString, schema="newick")
+         symdiff = treecompare.weighted_robinson_foulds_distance(moderateSparseTree, treeString)
+         symdiff = symdiff/len(moderateSparseTree.nodes())
+         print(symdiff)
 
-   for tree in NJTrees[100:119]:
-      symdiff = treecompare.weighted_robinson_foulds_distance(smallSparseTree, tree)
-      #symdiff = smallSparseTree.robinson_foulds_distance(tree) / len(smallSparseTree.nodes())
-      towrite2 = str(symdiff) + '\n'
-      with open(outfile, 'a') as out2:
-         out2.write(towrite2)
+       if index < 100 and index > 79:
+         treeList = dendropy.TreeList(taxon_namespace=smallDenseList.taxon_namespace);
+         tree = dendropy.Tree.get(path="./NJtrees/"+file, schema="newick")
+         treeString = tree.as_string(schema="newick")
+         treeList.read(data=treeString, schema="newick")
+         symdiff = treecompare.weighted_robinson_foulds_distance(smallDenseTree, treeString)
+         symdiff = symdiff/len(smallDenseTree.nodes())
+         print(symdiff)
+
+       if index < 120 and index > 99:
+         treeList = dendropy.TreeList(taxon_namespace=smallSparseList.taxon_namespace);
+         tree = dendropy.Tree.get(path="./NJtrees/"+file, schema="newick")
+         treeString = tree.as_string(schema="newick")
+         treeList.read(data=treeString, schema="newick")
+         symdiff = treecompare.weighted_robinson_foulds_distance(smallSparseTree, treeString)
+         symdiff = symdiff/len(smallSparseTree.nodes())
+         print(symdiff)
 
 def main():
    directory = os.listdir('./NJtrees')
-   outputFile = open('./RFdistances.txt', 'w')
-   setuploop(directory,outputFile)
-   file.close()         
+   setuploop(directory)
  
 if __name__ == "__main__":
     main()
