@@ -29,43 +29,43 @@ def setuploop(treefilelist):
          tree2 = dendropy.Tree.get_from_path("./NJTrees/"+file, "newick", taxon_namespace=tns)
          tree2.encode_bipartitions()
          rf = treecompare.weighted_robinson_foulds_distance(largeDenseTree, tree2)
-         #rf = rf/len(largeDenseTree.nodes())
-         print(rf)
+         rf_error = rf/2*len(largeDenseTree.internal_edges())
+         print(rf_error)
 
       if NJTrees.index(file) < 40 and NJTrees.index(file) > 19:
          tree2 = dendropy.Tree.get_from_path("./NJTrees/"+file, "newick", taxon_namespace=tns)
          tree2.encode_bipartitions()
          rf = treecompare.weighted_robinson_foulds_distance(largeSparseTree, tree2)
-         #rf = rf/len(largeSparseTree.nodes())
-         print(rf)
+         rf_error = rf/2*len(largeSparseTree.internal_edges())
+         print(rf_error)
 
       if NJTrees.index(file) < 60 and NJTrees.index(file) > 39:
          tree2 = dendropy.Tree.get_from_path("./NJTrees/"+file, "newick", taxon_namespace=tns)
          tree2.encode_bipartitions()
          rf = treecompare.weighted_robinson_foulds_distance(moderateDenseTree, tree2)
-         #rf = rf/len(moderateDenseTree.nodes())
-         print(rf)
+         rf_error = rf/2*len(moderateDenseTree.internal_edges())
+         print(rf_error)
 
       if NJTrees.index(file) < 80 and NJTrees.index(file) > 59:
          tree2 = dendropy.Tree.get_from_path("./NJTrees/"+file, "newick", taxon_namespace=tns)
          tree2.encode_bipartitions()
          rf = treecompare.weighted_robinson_foulds_distance(moderateSparseTree, tree2)
-         #rf = rf/len(moderateSparseTree.nodes())
-         print(rf)
+         rf_error = rf/2*len(moderateSparceTree.internal_edges())
+         print(rf_error)
 
       if NJTrees.index(file) < 100 and NJTrees.index(file) > 79:
          tree2 = dendropy.Tree.get_from_path("./NJTrees/"+file, "newick", taxon_namespace=tns)
          tree2.encode_bipartitions()
          rf = treecompare.weighted_robinson_foulds_distance(smallDenseTree, tree2)
-         #rf = rf/len(smallDenseTree.nodes())
-         print(rf)
+         rf_error = rf/2*len(smallDenseTree.internal_edges())
+         print(rf_error)
 
       if NJTrees.index(file) < 120 and NJTrees.index(file) > 99:
          tree2 = dendropy.Tree.get_from_path("./NJTrees/"+file, "newick", taxon_namespace=tns)
          tree2.encode_bipartitions()
          rf = treecompare.weighted_robinson_foulds_distance(smallSparseTree, tree2)
-         #rf = rf/len(smallSparseTree.nodes())
-         print(rf)
+         rf_error = rf/2*len(smallSparceTree.internal_edges())
+         print(rf_error)
 
 def main():
    directory = os.listdir('./NJtrees')
