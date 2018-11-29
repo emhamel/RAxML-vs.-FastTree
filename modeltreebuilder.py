@@ -2,35 +2,37 @@ import dendropy
 import random
 
 treeDictionaryDenseTaxa = {}
-treeDictionarySparseTaxa = {}
+treeDictionarySparceTaxa = {}
+
+work='/Projects/tallis/hamel/RAxML-vs.-FastTree/ModelTrees/'
 
 for i in range (0,3):
-	treeDictionaryDenseTaxa[i] = dendropy.Tree.get(file=open('/users/emmahamel/Research/ModelTrees/Originaltree.tt'),
+	treeDictionaryDenseTaxa[i] = dendropy.Tree.get(file=open(work + 'Originaltree.tt'),
                 	schema="newick")
-	treeDictionarySparseTaxa[i] = dendropy.Tree.get(file=open('/users/emmahamel/Research/ModelTrees/Originaltree.tt'),
+	treeDictionarySparceTaxa[i] = dendropy.Tree.get(file=open(work + 'Originaltree.tt'),
                 	schema="newick")
 
 setConstant = [.2, 1, 5]
 
 for k in range(0, 3):
 	treeDictionaryDenseTaxa[k].scale_edges(setConstant[k])
-	treeDictionarySparseTaxa[k].scale_edges(setConstant[k])
+	treeDictionarySparceTaxa[k].scale_edges(setConstant[k])
 
 randomNodes = []
-nodesArray = treeDictionarySparseTaxa[0].leaf_nodes()
+nodesArray = treeDictionarySparceTaxa[0].leaf_nodes()
 
 for p in range (0, 50):
 	choice = random.choice(nodesArray)
 	randomNodes.append(choice.taxon.label)
 	nodesArray.remove(choice)
 
-for l in range(0, len(treeDictionarySparseTaxa)):
+for l in range(0, len(treeDictionarySparceTaxa)):
 	treeDictionarySparceTaxa[l] = treeDictionarySparceTaxa[l].extract_tree_with_taxa_labels(randomNodes)
 
 setName = ["small", "moderate", "large"]
 
 for i in range (0,3):
-	treeDictionaryDenseTaxa[i].write(path='/users/emmahamel/Research/ModelTrees/' + setName[i] + 'lengthDense.tt', 
+	treeDictionaryDenseTaxa[i].write(path=work + setName[i] + 'lengthDense.tt', 
 		schema="newick")
-	treeDictionarySparceTaxa[i].write(path='/users/emmahamel/Research/ModelTrees/' + setName[i] + 'lengthSparce.tt', 
+	treeDictionarySparceTaxa[i].write(path=work + setName[i] + 'lengthSparse.tt', 
 		schema="newick")
