@@ -4,7 +4,7 @@ import random
 treeDictionaryDenseTaxa = {}
 treeDictionarySparceTaxa = {}
 
-work='/Projects/tallis/hamel/RAxML-vs.-FastTree/ModelTrees/'
+work='/projects/tallis/hamel/RAxML-vs.-FastTree/ModelTrees/'
 
 for i in range (0,3):
 	treeDictionaryDenseTaxa[i] = dendropy.Tree.get(file=open(work + 'Originaltree.tt'),
