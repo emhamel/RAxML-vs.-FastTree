@@ -4,6 +4,9 @@ import dendropy
 f = open("/projects/tallis/hamel/RAxML-vs.-FastTree/InputData/results.txt", "w+")
 
 taxa = dendropy.TaxonNamespace()
+originalTrees = []
+njTrees = []
+
 conditions = ["smallLengthDense", "smallLengthSparce", "moderateLengthDense", "moderateLengthSparce", "largeLengthDense", "largeLengthSparce"]
 
 originalTreesPath = "/projects/tallis/hamel/RAxML-vs.-FastTree/ModelTrees/"
