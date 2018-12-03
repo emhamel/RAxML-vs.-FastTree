@@ -7,7 +7,7 @@ taxa = dendropy.TaxonNamespace()
 originalTrees = []
 njTrees = []
 
-conditions = ["smallLengthDense", "smallLengthSparce", "moderateLengthDense", "moderateLengthSparce", "largeLengthDense", "largeLengthSparce"]
+conditions = ["smalllengthDense", "smalllengthSparce", "moderatelengthDense", "moderatelengthSparce", "largelengthDense", "largelengthSparce"]
 
 originalTreesPath = "/projects/tallis/hamel/RAxML-vs.-FastTree/ModelTrees/"
 njTreesPath = "/projects/tallis/hamel/RAxML-vs.-FastTree/ModelTrees/NJtrees/"
