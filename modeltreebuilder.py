@@ -9,8 +9,10 @@ work='/projects/tallis/hamel/RAxML-vs.-FastTree/ModelTrees/'
 for i in range (0,3):
 	treeDictionaryDenseTaxa[i] = dendropy.Tree.get(file=open(work + 'Originaltree.tt'),
                 	schema="newick")
+	treeDictionaryDenseTaxa[i].scale_edges(.5)
 	treeDictionarySparceTaxa[i] = dendropy.Tree.get(file=open(work + 'Originaltree.tt'),
                 	schema="newick")
+	treeDictionarySparceTaxa[i].scale_edges(.5)
 
 setConstant = [.1, 1, 2]
 
