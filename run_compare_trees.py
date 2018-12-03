@@ -16,7 +16,7 @@ for file in matching_files:
 for files in os.listdir(njTreesPath):
 	njTrees.append(files)
 
-for i in range(0, 1):
+for i in range(0, len(originalTrees)):
 	matching_files = [f for f in njTrees if conditions[i] in f]
 	tree1 = dendropy.Tree.get(file=open(originalTreesPath + "/" + conditions[i] + ".tt"),
                 	schema="newick", rooting='force-unrooted', taxon_namespace=taxa)
