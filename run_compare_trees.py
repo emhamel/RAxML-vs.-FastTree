@@ -1,7 +1,7 @@
 import os
 import dendropy
 
-f = open("/Users/emmahamel/Research/RAxMLvsFastTree/RF_results/results.txt", "w+")
+f = open("/Users/emmahamel/Research/RAxMLvsFastTree/InputData/results.txt", "w+")
 
 taxa = dendropy.TaxonNamespace()
 conditions = ["smallLengthDense", "smallLengthSparce", "moderateLengthDense", "moderateLengthSparce", "largeLengthDense", "largeLengthSparce"]
