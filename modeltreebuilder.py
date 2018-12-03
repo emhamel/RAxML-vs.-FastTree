@@ -12,7 +12,7 @@ for i in range (0,3):
 	treeDictionarySparceTaxa[i] = dendropy.Tree.get(file=open(work + 'Originaltree.tt'),
                 	schema="newick")
 
-setConstant = [.2, 1, 5]
+setConstant = [.1, 1, 2]
 
 for k in range(0, 3):
 	treeDictionaryDenseTaxa[k].scale_edges(setConstant[k])
