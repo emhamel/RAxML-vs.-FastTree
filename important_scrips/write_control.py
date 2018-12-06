@@ -7,11 +7,9 @@ def get_newick_string(tree):
     Creates a newick string with  branch lengths in decimal notation.
     This function was taken from Phybase.py, see
     github.com/ngcrawford/CloudForest/blob/master/cloudforest/phybase.py
-
     Parameters
     ----------
     tree : dendropy tree
-
     Returns
     -------
     new_tree : string
@@ -47,7 +45,6 @@ def get_newick_string(tree):
 def resolve_polytomies(tree):
     """
     Randomly resolves polytomies in tree.
-
     Parameters
     ----------
     tree : dendropy tree
@@ -56,9 +53,9 @@ def resolve_polytomies(tree):
                             update_bipartitions=True)
 
 
-filenames = ["largeLengthDense", "moderateLengthSparce", "smallLengthDense", "largeLengthSparce", "smallLengthSparce", "moderateLengthDense"]
+filenames = ["large_dense", "moderate_sparse", "small_dense", "large_sparse", "small_sparse", "moderate_dense"]
 for i in range(0, 6): 
-	tre = dendropy.Tree.get(file=open("/Users/emmahamel/Research/ModelTrees/Originaltree.tt"), 
+	tre = dendropy.Tree.get(file=open("/Users/emmahamel/Research/RAxMLvsFastTree/ModelTrees/" + filenames[i] + ".tt"), 
 		schema="newick")
 	resolve_polytomies(tre)
 	
@@ -74,9 +71,8 @@ for i in range(0, 6):
 	file.write("[TREE] treename  " + treeString + "\n")
 	file.write("[SETTINGS] [fileperrep] TRUE [output] FASTA\n")
 	file.write("[PARTITIONS] partitionname\n")
-	file.write("[treename modelname 500]\n")
-	file.write("[EVOLVE] partitionname 20 /Users/emmahamel/Research/RAxMLvsFastTree/InputData/" + filenames[i] + "/" + filenames[i] + ".tt\n")
+	file.write("[treename modelname 5000]\n")
+	file.write("[EVOLVE] partitionname 20 /Users/emmahamel/Research/RAxMLvsFastTree/InputData2/" + filenames[i] + ".tt\n")
 	file.close()
 
-	os.system("./indelible_1.03_OSX_intel " + "/Users/emmahamel/Research/ModelTrees/" + filenames[i] + ".tt")
-
+	os.system("./indelible_1.03_OSX_intel " + "/Users/emmahamel/Research/RAxMLvsFastTree/ModelTrees/" + filenames[i] + ".tt")
