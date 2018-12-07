@@ -11,6 +11,6 @@ do
 		rep=$(echo $fl | sed 's/.*TRUE_//g' | sed 's/\.fas//g')
 		echo "ToNEXUS format=FASTA fromFile=$datasets/$cond/$fl toFile=$nexfl; 
       	exe $output/temp_nexus_file/${cond}_$rep.nex; NJ distance=logDet showtree=No;
-      	savetrees file=$output/${cond}_$rep.tre format=newick;" | ./$paup/paup4a164_osx.exe -n
+      	savetrees file=$output/${cond}_$rep.tre format=newick;" | ./paup4a164_osx.exe -n
     done
 done
